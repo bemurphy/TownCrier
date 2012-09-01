@@ -32,6 +32,7 @@ module TownCrier
 end
 
 require_relative "town_crier/channel"
+require_relative "town_crier/channels/email_channel"
 require_relative "town_crier/channels/multi_channel"
 require_relative "town_crier/channels/pushover_channel"
 require_relative "town_crier/event"
