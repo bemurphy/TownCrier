@@ -38,6 +38,10 @@ module TownCrier
       event_hash["meta"] || {}
     end
 
+    def ==(other)
+      other.is_a?(self.class) && event_hash == other.event_hash
+    end
+
     def valid?
       begin
         !! (type && action)

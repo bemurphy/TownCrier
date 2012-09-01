@@ -17,4 +17,10 @@ describe TownCrier do
       TownCrier.config.foo = "BAR!"
     }.must_raise TypeError
   end
+
+  it "contains the active_channel for publishing" do
+    TownCrier.active_channel.must_be_nil
+    TownCrier.active_channel = "stub_channel"
+    TownCrier.active_channel.must_equal "stub_channel"
+  end
 end

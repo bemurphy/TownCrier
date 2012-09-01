@@ -19,9 +19,18 @@ module TownCrier
     @_config = nil if force
     @_config ||= OpenStruct.new
   end
+
+  class << self
+    # The channel workers should publish to.
+    # Outside of testing this will likely
+    # always be a MultiChannel so you can publish
+    # to multiple channels from workers
+    attr_accessor :active_channel
+  end
 end
 
 require_relative "town_crier/channel"
+require_relative "town_crier/channels/multi_channel"
 require_relative "town_crier/channels/pushover_channel"
 require_relative "town_crier/event"
 require_relative "town_crier/event_binding"
@@ -31,4 +40,5 @@ require_relative "town_crier/server"
 require_relative "town_crier/user"
 require_relative "town_crier/view"
 require_relative "town_crier/view_resolver"
+require_relative "town_crier/worker"
 

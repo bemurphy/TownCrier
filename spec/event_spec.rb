@@ -82,4 +82,11 @@ describe TownCrier::Event do
     subject.event_hash["action"] = "create"
     assert subject.valid?
   end
+
+  it "is == to another event with the same hash" do
+    other = TownCrier::Event.new(event_hash)
+    assert subject == other
+    other.event_hash["type"] = "other"
+    refute subject == other
+  end
 end
