@@ -26,6 +26,10 @@ module TownCrier
       @timestamp ||= event_hash["timestamp"] || Time.now.to_i
     end
 
+    def key
+      [namespace, type, action].join('.')
+    end
+
     def respond_to?(symbol, include_private = false)
       symbol.to_s.index("meta_") == 0 ? true : super
     end

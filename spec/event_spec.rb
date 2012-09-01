@@ -42,6 +42,10 @@ describe TownCrier::Event do
     subject.timestamp.must_be_close_to(Time.now.to_i, 1)
   end
 
+  it "can represent its key as namespace.type.action" do
+    subject.key.must_equal "foobar.account.create"
+  end
+
   it "responds to dynamic meta_ methods" do
     subject.must_respond_to :meta_id
     subject.must_respond_to :meta_plan
