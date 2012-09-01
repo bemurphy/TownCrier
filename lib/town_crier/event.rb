@@ -30,13 +30,17 @@ module TownCrier
       [namespace, type, action].join('.')
     end
 
+    def meta
+      event_hash["meta"] || {}
+    end
+
     def respond_to?(symbol, include_private = false)
       symbol.to_s.index("meta_") == 0 ? true : super
     end
 
     def method_missing(meth, *args, &blk)
       if meth.to_s =~ /^meta_(.+)$/
-        event_hash["meta"][$1]
+        meta[$1]
       else
         super
       end

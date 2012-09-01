@@ -46,6 +46,11 @@ describe TownCrier::Event do
     subject.key.must_equal "foobar.account.create"
   end
 
+  it "sets an empty meta hash if not provided" do
+    subject = TownCrier::Event.new({})
+    assert subject.meta == {}
+  end
+
   it "responds to dynamic meta_ methods" do
     subject.must_respond_to :meta_id
     subject.must_respond_to :meta_plan
