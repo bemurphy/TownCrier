@@ -11,6 +11,7 @@ module TownCrier
       view = view(event)
 
       recipients(event).each do |user|
+        next if user.pushover_key.to_s.empty?
         client.notify(user.pushover_key, view.message, :title => view.title)
       end
     end
