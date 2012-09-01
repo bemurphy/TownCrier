@@ -9,6 +9,7 @@ require_relative "town_crier/event_binding"
 require_relative "town_crier/lookups/user_lookup"
 require_relative "town_crier/user"
 require_relative "town_crier/view"
+require_relative "town_crier/view_resolver"
 
 module TownCrier
 end
