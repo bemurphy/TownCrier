@@ -6,9 +6,11 @@ module TownCrier
     index :event_binding
 
     def self.infect_an_attribute(attribute)
-      if new.methods & [attribute.to_sym, "#{attribute}=".to_sym] == []
+      methods = new.methods & [attribute.to_sym, "#{attribute}=".to_sym]
+
+      if methods.length == 0
         attribute attribute.to_sym
-      elsif (new.methods & [attribute.to_sym, "#{attribute}=".to_sym]).length == 1
+      elsif methods.length == 1
         raise TownCrier::Error, "#{attribute} methods partially defined, abort"
       end
     end
