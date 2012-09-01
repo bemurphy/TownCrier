@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = TownCrier::VERSION
 
   gem.add_dependency "ohm"
+  gem.add_dependency "rushover"
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "minitest"

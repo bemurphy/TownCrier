@@ -12,8 +12,17 @@ module TownCrier
     end
 
     def recipients(event)
-      event_binding = EventBinding.from_string([event.key, "channel"].join('.'))
+      event_binding = EventBinding.from_string([event.key, key].join('.'))
       lookup.recipients(event_binding)
+    end
+
+    def key
+      if self.class == TownCrier::Channel
+        "channel"
+      else
+        name = self.class.name.split('::').last
+        name.gsub(/Channel$/, '').downcase
+      end
     end
   end
 end
