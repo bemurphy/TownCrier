@@ -67,4 +67,13 @@ describe TownCrier::Event do
     subject = TownCrier::Event.from_json(json)
     subject.event_hash.must_equal event_hash
   end
+
+  it "is valid as long as it has a type and action" do
+    subject = TownCrier::Event.new({})
+    refute subject.valid?
+    subject.event_hash["type"] = "account"
+    refute subject.valid?
+    subject.event_hash["action"] = "create"
+    assert subject.valid?
+  end
 end

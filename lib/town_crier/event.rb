@@ -34,6 +34,14 @@ module TownCrier
       event_hash["meta"] || {}
     end
 
+    def valid?
+      begin
+        !! (type && action)
+      rescue KeyError
+        false
+      end
+    end
+
     def respond_to?(symbol, include_private = false)
       symbol.to_s.index("meta_") == 0 ? true : super
     end
