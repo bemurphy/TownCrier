@@ -7,6 +7,10 @@ describe TownCrier::UserLookup do
   }
   subject { TownCrier::UserLookup.new }
 
+  it "has a default contact_key of :email" do
+    subject.contact_key.must_equal :email
+  end
+
   it "infects the user with the attribute for the lookup key" do
     subject.contact_key = :test_key
     subject.contact_key.must_equal :test_key
