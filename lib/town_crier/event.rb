@@ -10,6 +10,10 @@ module TownCrier
       new JSON.parse(json)
     end
 
+    def to_json
+      event_hash.to_json
+    end
+
     def namespace
       event_hash["namespace"] || "default"
     end

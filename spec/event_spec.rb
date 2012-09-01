@@ -68,6 +68,12 @@ describe TownCrier::Event do
     subject.event_hash.must_equal event_hash
   end
 
+  it "converts to json using the event_hash" do
+    json = event_hash.to_json
+    subject = TownCrier::Event.new(event_hash)
+    subject.to_json.must_equal json
+  end
+
   it "is valid as long as it has a type and action" do
     subject = TownCrier::Event.new({})
     refute subject.valid?
