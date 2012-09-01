@@ -17,7 +17,10 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "ohm"
   gem.add_dependency "rushover"
+  gem.add_dependency "sinatra"
+  gem.add_dependency "rack-parser"
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency "minitest"
+  gem.add_development_dependency "rack-test"
 end

@@ -1,6 +1,10 @@
+ENV['RACK_ENV'] = 'test'
+
 require "minitest/spec"
 require "minitest/pride"
 require "minitest/autorun"
+
+require "rack/test"
 
 require_relative '../lib/town_crier'
 
@@ -15,6 +19,12 @@ MiniTest::Spec.after do
 end
 
 class MiniTest::Spec < MiniTest::Unit::TestCase
+  include Rack::Test::Methods
+
+  def app
+    TownCrier::Server
+  end
+
   def with_temp_class(name, &block)
     raise "Must provide a block" unless block_given?
     raise("Cannot define temp class, constant #{name} is already defined") if Object.const_defined?(name)
