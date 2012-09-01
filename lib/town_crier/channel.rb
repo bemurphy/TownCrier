@@ -31,5 +31,11 @@ module TownCrier
     def event_binding(event)
       EventBinding.from_string([event.key, key].join('.'))
     end
+
+    def view(event)
+      binding = event_binding(event)
+      view_class = ViewResolver.new(binding).resolve
+      view_class.new(event)
+    end
   end
 end

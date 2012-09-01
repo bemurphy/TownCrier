@@ -25,4 +25,14 @@ describe TownCrier::Channel do
 
     lookup.verify
   end
+
+  it "finds a view using the view resolver" do
+    class DefaultAccountCreateChannelView
+      def initialize(*args); end
+    end
+
+    event = TownCrier::Event.new("type" => "account", "action" => "create")
+    subject.view(event).must_be_instance_of(DefaultAccountCreateChannelView)
+    Object.send(:remove_const, "DefaultAccountCreateChannelView")
+  end
 end
