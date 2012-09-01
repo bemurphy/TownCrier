@@ -60,3 +60,19 @@ describe TownCrier::User, "event bindings" do
     TownCrier::User.with_event_binding(event_binding).must_include jane
   end
 end
+
+describe TownCrier::User, "infecting with attributes" do
+  subject { TownCrier::User }
+
+  it "declares an attribute for the passed attribute" do
+    subject.infect_an_attribute(:fizzbuzz_key)
+    subject.new.methods.must_include :fizzbuzz_key
+    subject.new.methods.must_include :fizzbuzz_key=
+  end
+
+  it "raises an error if either just the setter or getting method is already defined" do
+    proc {
+      subject.infect_an_attribute(:new?)
+    }.must_raise TownCrier::Error
+  end
+end

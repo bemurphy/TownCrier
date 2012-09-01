@@ -6,6 +6,8 @@ require "ostruct"
 module TownCrier
   QUEUE_NAME = :town_crier_queue
 
+  Error = Class.new(StandardError)
+
   def self.config
     init_config
     @_config
