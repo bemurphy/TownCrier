@@ -1,5 +1,6 @@
 require "sinatra/base"
 require 'rack/parser'
+require 'town_crier/queue'
 
 module TownCrier
   class Server < Sinatra::Base
