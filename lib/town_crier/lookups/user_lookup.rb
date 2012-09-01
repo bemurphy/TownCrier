@@ -1,10 +1,12 @@
 module TownCrier
   class UserLookup
-    def self.infect_an_attribute(attribute)
-      User.infect_an_attribute attribute
+    attr_reader :contact_key
+    def contact_key=(key)
+      User.infect_an_attribute key
+      @contact_key = key
     end
 
-    def self.recipients(event_binding)
+    def recipients(event_binding)
       User.with_event_binding(event_binding)
     end
   end

@@ -4,7 +4,7 @@ module TownCrier
   class PushoverChannel < Channel
     def initialize(*)
       super
-      lookup.infect_an_attribute(:pushover_key)
+      lookup.contact_key = :pushover_key
     end
 
     def publish(event)
