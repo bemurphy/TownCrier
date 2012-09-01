@@ -1,11 +1,17 @@
 module TownCrier
   class UserLookup
-    def self.infect_an_attribute(attribute)
-      User.infect_an_attribute attribute
+    def contact_key
+      @contact_key || :email
     end
 
-    def self.recipients(event_binding)
-      User.with_event_binding(event_binding)
+    def contact_key=(key)
+      User.infect_an_attribute key
+      @contact_key = key
+    end
+
+    def recipients(event_binding)
+      users = User.with_event_binding(event_binding)
+      users.reject { |u| u.send(contact_key).to_s.empty? }
     end
   end
 end

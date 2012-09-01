@@ -17,7 +17,7 @@ class MockRushoverClient
 end
 
 describe TownCrier::PushoverChannel do
-  let(:lookup) { TownCrier::UserLookup }
+  let(:lookup) { TownCrier::UserLookup.new }
   let(:event) { TownCrier::Event.new("type" => "test", "action" => "create") }
   subject { TownCrier::PushoverChannel.new(lookup, :token => "test_token") }
 
@@ -25,9 +25,9 @@ describe TownCrier::PushoverChannel do
     subject.key.must_equal "pushover"
   end
 
-  it "infects via the lookup with a pushover_key attribute" do
+  it "sets the lookup contact_key" do
     lookup = Minitest::Mock.new
-    lookup.expect :infect_an_attribute, nil, [:pushover_key]
+    lookup.expect :contact_key=, nil, [:pushover_key]
     subject = TownCrier::PushoverChannel.new(lookup, {})
     lookup.verify
   end
