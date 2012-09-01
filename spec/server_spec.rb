@@ -27,9 +27,14 @@ describe TownCrier::Server do
   it "pushes a valid event into the queue" do
     event_hash = { "type" => "account", "action" => "create" }
     post "/api/v1/events", event_hash.to_json, { "CONTENT_TYPE" => "application/json" }
-    queue.datas.must_equal [event_hash]
+    queue.datas.first.type.must_equal "account"
+    queue.datas.first.action.must_equal "create"
     assert last_response.ok?
   end
 
-  it "returns status 400 if the event data is not valid"
+  it "returns status 400 if the event data is not valid" do
+    event_hash = { "type" => "account" }
+    post "/api/v1/events", event_hash.to_json, { "CONTENT_TYPE" => "application/json" }
+    last_response.status.must_equal 400
+  end
 end

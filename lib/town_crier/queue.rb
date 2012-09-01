@@ -1,6 +1,6 @@
 module TownCrier
   class Queue
-    def self.<<(event_hash)
+    def self.<<(event)
     end
   end
 end

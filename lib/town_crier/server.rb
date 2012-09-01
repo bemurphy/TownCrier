@@ -12,10 +12,15 @@ module TownCrier
 
     post "/api/v1/events" do
       content_type :json
-      settings.queue << params
 
-      #placeholder for now to pass linting, etc
-      "ok"
+      event = TownCrier::Event.new(params)
+      if event.valid?
+        settings.queue << event
+        #placeholder for now to pass linting, etc
+        "ok"
+      else
+        halt 400
+      end
     end
   end
 end
