@@ -90,6 +90,39 @@ that's not found, it will skip the namespace and look for
 `AccountCreateView`.  Finally, if nothing is found, it will fall back to the
 `TownCrier::View` as a default.
 
+Channels
+--------
+
+Channels provide the medium for sending a notification.  TownCrier currently
+ships with channels for Pushover, SMS, and Email.  It also features a Multi
+channel, which aggregates multiple channels for sending out in serial.  This
+enables a worker to publish to a MultiChannel instance, which is configured to
+publish out over SMS, Email, etc.
+
+Channels are initialized with a Lookup that should provide a `recipients`
+method that accepts an event binding and looks for interested recipients.
+Currently, a `UserLookup` is provided for finding users with specific
+bindings.
+
+For instance, you may want to enable an email channel that publishes every
+notice to the noc and ops email addresses:
+
+```ruby
+class NocOps < UserLookup
+  def recipients(*)
+    [
+      OpenStruct.new(:email => "noc@example.com"),
+      OpenStruct.new(:email => "ops@example.com")
+    ]
+  end
+end
+
+email_channel = TownCrier::EmailChannel.new(NocOps.new, email_config)
+```
+
+Creating an EmailChannel and injecting this lookup will ensure they're always
+notified about everything.  You've been warned!
+
 ## Installation
 
 Add this line to your application's Gemfile:
