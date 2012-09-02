@@ -5,6 +5,7 @@ module TownCrier
     def initialize(lookup, options = {})
       @lookup = lookup
       @options = options
+      self.class.register(lookup)
     end
 
     def publish(event)
@@ -13,6 +14,10 @@ module TownCrier
 
     def recipients(event)
       lookup.recipients(event_binding(event))
+    end
+
+    def self.register(lookup)
+      #no-op
     end
 
     def self.key

@@ -2,9 +2,10 @@ require 'twilio-ruby'
 
 module TownCrier
   class SmsChannel < Channel
-    def initialize(*)
-      super
-      lookup.contact_key = :mobile_number
+    def self.register(lookup = TownCrier::UserLookup.new)
+      if lookup.respond_to?(:contact_key=)
+        lookup.contact_key = :mobile_number
+      end
     end
 
     def publish(event)

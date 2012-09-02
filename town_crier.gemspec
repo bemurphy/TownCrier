@@ -27,4 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "minitest"
   gem.add_development_dependency "rack-test"
   gem.add_development_dependency "flog"
+  gem.add_development_dependency "guard-minitest"
+  gem.add_development_dependency "rb-fsevent", "~> 0.9.1"
+  gem.add_development_dependency "growl"
 end
