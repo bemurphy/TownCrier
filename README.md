@@ -108,7 +108,7 @@ For instance, you may want to enable an email channel that publishes every
 notice to the noc and ops email addresses:
 
 ```ruby
-class NocOps < UserLookup
+class NocOps < TownCrier::UserLookup
   def recipients(*)
     [
       OpenStruct.new(:email => "noc@example.com"),
