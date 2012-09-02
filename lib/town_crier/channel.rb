@@ -16,7 +16,7 @@ module TownCrier
       lookup.recipients(event_binding(event))
     end
 
-    def self.register(lookup)
+    def self.register(lookup = nil)
       #no-op
     end
 
