@@ -3,9 +3,7 @@ require 'rushover'
 module TownCrier
   class PushoverChannel < Channel
     def self.register(lookup = TownCrier::UserLookup.new)
-      if lookup.respond_to?(:contact_key=)
-        lookup.contact_key = :pushover_key
-      end
+      lookup.contact_key = :pushover_key if lookup.respond_to?(:contact_key=)
     end
 
     def publish(event)
