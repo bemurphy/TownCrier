@@ -2,6 +2,9 @@
 
 TownCrier - Multi Channel short announcement service for your organization
 
+Note, this is under currently development and not ready yet.  Needs
+authentication, the admin app, etc.
+
 What's it used for?
 -------------------
 
