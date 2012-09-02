@@ -6,7 +6,7 @@ module TownCrier
 
     def contact_key=(key)
       User.infect_an_attribute key
-      @contact_key = key
+      @contact_key = key.to_sym
     end
 
     def recipients(event_binding)
