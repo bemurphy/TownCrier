@@ -2,6 +2,7 @@ require "town_crier/version"
 require "json"
 require "ohm"
 require "ostruct"
+require "securerandom"
 
 module TownCrier
   QUEUE_NAME = :town_crier_queue
@@ -20,6 +21,10 @@ module TownCrier
   def self.init_config(force = false)
     @_config = nil if force
     @_config ||= OpenStruct.new
+  end
+
+  def self.generate_token
+    SecureRandom.urlsafe_base64(32).tr('-_', '')[0,30]
   end
 
   class << self

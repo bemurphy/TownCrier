@@ -24,3 +24,15 @@ describe TownCrier do
     TownCrier.active_channel.must_equal "stub_channel"
   end
 end
+
+describe TownCrier, "generating a token" do
+  it "returns a token 30 chars long" do
+    assert_equal 30, TownCrier.generate_token.length
+  end
+
+  it "only includes alphanumeric chars" do
+    20.times {
+      assert_match /^[a-zA-Z0-9]+$/, TownCrier.generate_token
+    }
+  end
+end
