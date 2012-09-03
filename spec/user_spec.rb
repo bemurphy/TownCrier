@@ -24,6 +24,12 @@ describe TownCrier::User do
     subject.valid?
     subject.errors.keys.must_include :email
   end
+
+  it "builds a token on create" do
+    subject = TownCrier::User.create(:name => "joe", :email => "joe@example.com")
+    assert subject.token
+    assert TownCrier::User[subject.id].token
+  end
 end
 
 describe TownCrier::User, "event bindings" do

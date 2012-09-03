@@ -1,6 +1,7 @@
 require "town_crier/version"
 require "json"
 require "ohm"
+require "ohm/contrib"
 require "ostruct"
 require "securerandom"
 

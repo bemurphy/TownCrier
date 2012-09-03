@@ -1,8 +1,13 @@
 module TownCrier
   class User < Ohm::Model
+    include Ohm::Callbacks
+
     attribute :name
     attribute :email
+    attribute :token
 
+    index :email
+    index :token
     index :event_binding
 
     def self.infect_an_attribute(attribute)
@@ -13,6 +18,10 @@ module TownCrier
       elsif methods.length == 1
         raise TownCrier::Error, "#{attribute} methods partially defined, abort"
       end
+    end
+
+    def before_create
+      self.token ||= TownCrier.generate_token
     end
 
     def validate
